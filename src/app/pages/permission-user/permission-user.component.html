@@ -1,0 +1,62 @@
+<div>
+    @if(userData != null ){
+
+        <h2 class="text-2xl font-semibold text-center text-gray-900">{{userData?.user_id?.full_name}} ({{userData?.user_id?.role}})</h2>
+    }
+
+    <form [formGroup]="permissionFOrm" (ngSubmit)="onSubmit(permissionFOrm.value)">
+<h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Permission</h3>
+<ul class="flex  text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+        <div class="flex items-center ps-3">
+            <input formControlName="read" id="vue-checkbox" [checked]="userData?.read" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+            <label for="vue-checkbox" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer (Book)</label>
+        </div>
+    </li>
+    <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+        <div class="flex items-center ps-3">
+            <input formControlName="write" id="react-checkbox" [checked]="userData?.write" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+            <label for="react-checkbox" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vender (Book, Order)</label>
+        </div>
+    </li>
+    <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+        <div class="flex items-center ps-3">
+            <input formControlName="update" id="angular-checkbox" [checked]="userData?.update" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+            <label for="angular-checkbox" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin (Book, Orders, Users)</label>
+        </div>
+    </li>
+    <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+        <div class="flex items-center ps-3">
+            <input formControlName="delete" id="laravel-checkbox" [checked]="userData?.delete" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+            <label for="laravel-checkbox" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Delete (Book, Orders, Users , Permission)</label>
+        </div>
+    </li>
+</ul>
+
+
+<h3 class="mt-5 mb-4 font-semibold text-gray-900 dark:text-white">Role</h3>
+<select formControlName="role" id="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option  value="customer">Customer</option>
+    <option value="vender">Vender</option>
+    <option  value="admin">Admin</option>
+
+  </select>
+
+<!-- <h3 class="mt-5 mb-4 font-semibold text-gray-900 dark:text-white">Is Active</h3> -->
+    
+
+
+<!-- <select formControlName="is_active" id="is_active" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option [selected]="userData?.user_id?.is_active == true? true : false" value="true">Yes</option>
+    <option [selected]="userData?.user_id?.is_active != true? true : false" value="false">No</option>
+
+  </select> -->
+    <button type="submit" class="mt-5 focus:outline-none text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Purple</button>
+    </form>
+<h3 class="text-right mt-5 mb-4 font-semibold text-gray-900 dark:text-white">User Delete</h3>
+
+<div style="text-align: right;">
+    <button (click)="deleteUser(userId)"  type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+    
+</div>
+</div>
