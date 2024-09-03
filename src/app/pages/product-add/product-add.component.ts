@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { GlobalService } from '../../share/global.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-add',
@@ -18,7 +17,7 @@ export class ProductAddComponent implements OnInit {
   userId:any
   userName:any
 
-  constructor(private  fb:FormBuilder, private  global:GlobalService,  private toastr: ToastrService, private router : Router){}
+  constructor(private  fb:FormBuilder, private  global:GlobalService,  private toastr: ToastrService){}
 
   ngOnInit(): void {
     this.token = this.global.getToken()
@@ -50,19 +49,11 @@ export class ProductAddComponent implements OnInit {
         },
         error:(err:any) => {
           this.toastr.error(err.error.message,  "Error")
-          this.expireSession(err.error.message)
         },
       })
     }
   // }
 
 
-  expireSession(message:any){
-    if(message == "Session expired"){
-      alert("Sesstion Is Expired Please login")
-      this.global.logout()
-      this.router.navigate(['login'])
-    }
-    
-  }
+
 }

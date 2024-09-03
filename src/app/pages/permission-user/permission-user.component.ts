@@ -48,7 +48,6 @@ export class PermissionUserComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
-          this.expireSession(err.error.message)
 
         },
       });
@@ -77,7 +76,6 @@ export class PermissionUserComponent implements OnInit {
           },
           error: (err) => {
             this.toastr.error(err.error.message, 'Error');
-            this.expireSession(err.error.message)
 
           },
         });
@@ -90,7 +88,6 @@ export class PermissionUserComponent implements OnInit {
         },
         error: (err) => {
           this.toastr.error(err.error.message, 'Error');
-          this.expireSession(err.error.message)
 
         },
       });
@@ -106,7 +103,6 @@ export class PermissionUserComponent implements OnInit {
         },
         error: (err) => {
           this.toastr.error(err.error.message, 'Error');
-          this.expireSession(err.error.message)
 
         },
       });
@@ -124,19 +120,10 @@ export class PermissionUserComponent implements OnInit {
         },
         error: (err) => {
           this.toastr.error(err.error.message, 'Error');
-          this.expireSession(err.error.message)
         },
       })
     }
   }
 
 
-  expireSession(message:any){
-    if(message == "Session expired"){
-      alert("Sesstion Is Expired Please login")
-      this.global.logout()
-      this.router.navigate(['login'])
-    }
-    
-  }
 }

@@ -16,11 +16,15 @@ export class OrderComponent implements OnInit {
   token: any;
   userRole: any;
   venderId: any;
-  constructor(private global: GlobalService, private toastr: ToastrService, private router: Router) {}
+  constructor(private global: GlobalService , private toastr: ToastrService, private router: Router) {}
   ngOnInit(): void {
     this.token = this.global.getToken();
     this.userRole = this.global.getUserData().role;
     this.venderId = this.global.getUserData()._id;
+    this.getOrder()
+  }
+
+  getOrder(){
     if (this.userRole === 'admin') {
       this.global.getWithToken('order', this.token).subscribe({
         next: (res: any) => {
@@ -29,7 +33,6 @@ export class OrderComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
-          this.expireSession(err.error.message)
         },
       });
     } else {
@@ -40,31 +43,20 @@ export class OrderComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
-          this.expireSession(err.error.message)
         },
       });
     }
   }
-
-  deleteOrder(id:any){
+    deleteOrder(id:any){
     this.global.deleteWithToken(`order/${id}`, this.token).subscribe({
       next:(value:any)=> {
         this.toastr.success(value.message, "Success")
+        this.getOrder()
+
       },
       error:(err:any)=>{
         this.toastr.error(err.error.message, "Error")
-        this.expireSession(err.error.message)
       }
     })
-  }
-
-
-  expireSession(message:any){
-    if(message == "Session expired"){
-      alert("Sesstion Is Expired Please login")
-      this.global.logout()
-      this.router.navigate(['login'])
-    }
-    
   }
 }

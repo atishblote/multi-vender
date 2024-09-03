@@ -25,7 +25,6 @@ export class BooksComponent implements OnInit {
         console.log(res);
       },
       error: (err: any) => {
-        this.expireSession(err.error.message)
         console.log(err);
       },
     });
@@ -47,19 +46,11 @@ export class BooksComponent implements OnInit {
       },
       error: (err: any) => {
         console.log(err);;
-        this.expireSession(err.error.message)
         this.toastr.error('Error', err.error.message);
       },
     });
   }
 
 
-  expireSession(message:any){
-    if(message == "Session expired"){
-      alert("Sesstion Is Expired Please login")
-      this.global.logout()
-      this.router.navigate(['login'])
-    }
-    
-  }
+
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalService } from '../../share/global.service';
 import { NgClass } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import {  RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-all-users',
@@ -14,7 +14,7 @@ export class AllUsersComponent implements OnInit{
     allUsers:any
     token:any
     userId:any
-    constructor(private global: GlobalService, private router: Router){}
+    constructor(private global: GlobalService){}
     ngOnInit(): void {
       this.token =  this.global.getToken()
       this.userId = this.global.getUserData()._id
@@ -26,7 +26,6 @@ export class AllUsersComponent implements OnInit{
         },
         error: (err:any)=>{
           console.log(err)
-          this.expireSession(err.error.message)
         }
       })
     }
@@ -34,12 +33,5 @@ export class AllUsersComponent implements OnInit{
 
 
 
-    expireSession(message:any){
-      if(message == "Session expired"){
-        alert("Sesstion Is Expired Please login")
-        this.global.logout()
-        this.router.navigate(['login'])
-      }
-      
-    }
+
 }
