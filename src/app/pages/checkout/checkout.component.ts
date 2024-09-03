@@ -56,6 +56,7 @@ export class CheckoutComponent {
         },
         error: (err: any) => {
           console.log(err);
+          this.expireSession(err.error.message)
         },
       });
   }
@@ -118,10 +119,21 @@ export class CheckoutComponent {
         },
         error: (err) => {
           this.toastr.success(err.error.message, 'Something Went Wrong');
+          this.expireSession(err.error.message)
         },
       });
     } else {
       this.toastr.warning('Fill all fields', 'Empty');
     }
+  }
+
+
+  expireSession(message:any){
+    if(message == "Session expired"){
+      alert("Sesstion Is Expired Please login")
+      this.global.logout()
+      this.router.navigate(['login'])
+    }
+    
   }
 }

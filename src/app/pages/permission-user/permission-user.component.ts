@@ -48,6 +48,8 @@ export class PermissionUserComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
+          this.expireSession(err.error.message)
+
         },
       });
 
@@ -70,22 +72,26 @@ export class PermissionUserComponent implements OnInit {
         .subscribe({
           next: (res: any) => {
             this.toastr.success(res.message, 'Permission');
-          this.router.navigate(['bk/user'])
+          this.router.navigate(['/bk/users'])
 
           },
           error: (err) => {
             this.toastr.error(err.error.message, 'Error');
+            this.expireSession(err.error.message)
+
           },
         });
     } else {
       this.global.postWithToken(data, `permission/add`, this.token).subscribe({
         next: (res: any) => {
           this.toastr.success(res.message, 'Permission');
-          this.router.navigate(['bk/user'])
+          this.router.navigate(['/bk/users'])
 
         },
         error: (err) => {
           this.toastr.error(err.error.message, 'Error');
+          this.expireSession(err.error.message)
+
         },
       });
     }
@@ -100,6 +106,8 @@ export class PermissionUserComponent implements OnInit {
         },
         error: (err) => {
           this.toastr.error(err.error.message, 'Error');
+          this.expireSession(err.error.message)
+
         },
       });
   }
@@ -116,8 +124,19 @@ export class PermissionUserComponent implements OnInit {
         },
         error: (err) => {
           this.toastr.error(err.error.message, 'Error');
+          this.expireSession(err.error.message)
         },
       })
     }
+  }
+
+
+  expireSession(message:any){
+    if(message == "Session expired"){
+      alert("Sesstion Is Expired Please login")
+      this.global.logout()
+      this.router.navigate(['login'])
+    }
+    
   }
 }
