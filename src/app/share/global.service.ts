@@ -6,8 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
 
-
-  baseUrl:string= 'http://localhost:3000'
+  // node.matkalive.co/
+  // baseUrl:string= 'http://localhost:3000'
+  baseUrl:string= 'https://node.matkalive.co'
   apiKey:any
   constructor(private http: HttpClient) { }
 
